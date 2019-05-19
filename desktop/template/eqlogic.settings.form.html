@@ -1,0 +1,33 @@
+<form class="form-horizontal">
+    <fieldset>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">#eqlogic_label_name#</label>
+            <div class="col-sm-3">
+                <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
+                <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="#eqlogic_label_name#"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" >{{Objet parent}}</label>
+            <div class="col-sm-3">
+                <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
+                    #eqlogic_parentobj_options#
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">{{Catégorie}}</label>
+            <div class="col-sm-9">
+                #eqlogic_categories_checkboxes#
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"></label>
+            <div class="col-sm-9">
+                <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+                <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+            </div>
+        </div>
+        #eqlogic_settings_custom#
+    </fieldset>
+</form>
