@@ -1,19 +1,21 @@
 <?php
 
-class pluginRenderer {
-    const PLUGIN_ID  = 'template';
+abstract class pluginRenderer {
     const VERSION    = 'desktop';
 
     private $plugin          = NULL;
     private $eqLogics        = NULL;
-    private $eqLogics_name   = '';
     private $templates_cache = NULL;
     
+    abstract public function getPluginId();
+    
+    abstract public function getEqLogicsLabel();
+    
+    abstract public function getEqLogicNameLabel();
+    
     public function __construct() {
-        $this->plugin   = plugin::byId(pluginRenderer::PLUGIN_ID);
+        $this->plugin   = plugin::byId($this->getPluginId());
         $this->eqLogics = $eqLogics = eqLogic::byType($this->plugin->getId());
-        $this->eqLogics_name = __('Mes templates', __FILE__);
-        $this->eqLogic_label_name = __("Nom de l'équipement template", __FILE__);
         $this->templates_cache = array();
     }
     
@@ -39,7 +41,7 @@ class pluginRenderer {
         }
         
         $replace_eqlogics = array(
-            '#eqlogics_name#' => $this->eqLogics_name,
+            '#eqlogics_name#' => $this->getEqLogicsLabel(),
             '#eqlogics_content#' => $eqlogics_content,
         );
         
@@ -60,7 +62,7 @@ class pluginRenderer {
     
     public function renderEqLogicSettingsForm() {
         $replace_form = array(
-            '#eqlogic_label_name#'            => $this->eqLogic_label_name,
+            '#eqlogic_label_name#'            => $this->getEqLogicNameLabel(),
             '#eqlogic_parentobj_options#'     => $this->renderEqLogicParentObjectsOptions(),
             '#eqlogic_categories_checkboxes#' => $this->renderEqLogicCategoriesCheckboxes(),
             '#eqlogic_settings_custom#'       => $this->renderEqLogicSettingsCustom(),
@@ -107,7 +109,7 @@ class pluginRenderer {
     
     private function getTemplate($_filename) {
         if (!array_key_exists($_filename, $this->templates_cache)) {
-            $path = dirname(__FILE__) . '/../../../' . pluginRenderer::PLUGIN_ID . '/' . pluginRenderer::VERSION . '/template/' . $_filename . '.html';
+            $path = dirname(__FILE__) . '/../../../' . $this->getPluginId() . '/' . pluginRenderer::VERSION . '/template/' . $_filename . '.html';
             $this->templates_cache[$_filename] = (file_exists($path)) ? file_get_contents($path) : '';
         }
         return $this->templates_cache[$_filename];

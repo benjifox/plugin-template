@@ -3,8 +3,8 @@ if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
 
-require_once __DIR__  . '/pluginRenderer.php';
-$renderer = new pluginRenderer();
+require_once __DIR__  . '/pluginRendererImpl.php';
+$renderer = new pluginRendererImpl();
 $renderer->sendVarToJS();
 ?>
 
@@ -25,5 +25,5 @@ $renderer->sendVarToJS();
     </div>
 </div>
 
-<?php include_file('desktop', pluginRenderer::PLUGIN_ID, 'js', pluginRenderer::PLUGIN_ID);?>
+<?php include_file('desktop', pluginRendererImpl::PLUGIN_ID, 'js', pluginRendererImpl::PLUGIN_ID);?>
 <?php include_file('core', 'plugin.template', 'js');?>

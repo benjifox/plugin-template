@@ -21,9 +21,9 @@ if (!isConnect()) {
     include_file('desktop', '404', 'php');
     die();
 }
-require_once dirname(__FILE__) . '/../desktop/php/pluginRenderer.php';
+require_once dirname(__FILE__) . '/../desktop/php/pluginRendererImpl.php';
 
-$renderer = new pluginRenderer();
+$renderer = new pluginRendererImpl();
 print $renderer->renderPluginSettingsCustom();
 
 ?>
